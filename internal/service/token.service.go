@@ -6,8 +6,9 @@ import (
 
 	"github.com/Sandhya-Pratama/bioskop-api/common"
 	"github.com/Sandhya-Pratama/bioskop-api/entity"
+	"github.com/Sandhya-Pratama/bioskop-api/internal/config"
+
 	"github.com/golang-jwt/jwt/v5"
-	"honnef.co/go/tools/config"
 )
 
 type TokenUseCase interface {
@@ -25,9 +26,9 @@ func NewTokenService(cfg *config.Config) *TokenService {
 func (s *TokenService) GenerateAccessToken(ctx context.Context, user *entity.User) (string, error) {
 	expiredTime := time.Now().Local().Add(10 * time.Minute).Unix()
 	claim := common.JwtCustomClaims{
-		ID:    user.ID,
-		Email: user.Email,
-		Roles: user.Roles,
+		ID:       user.ID,
+		Username: user.Username,
+		Roles:    user.Roles,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Unix(expiredTime, 0)),
 		},

@@ -9,6 +9,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Sandhya-Pratama/bioskop-api/internal/builder"
+	"github.com/Sandhya-Pratama/bioskop-api/internal/config"
+	"github.com/Sandhya-Pratama/bioskop-api/internal/http/binder"
+	"github.com/Sandhya-Pratama/bioskop-api/internal/http/server"
+	"github.com/Sandhya-Pratama/bioskop-api/internal/http/validator"
 	"github.com/labstack/echo/v4"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -27,15 +32,15 @@ func main() {
 	db, err := buildGormDB(cfg.Postgres)
 	checkError(err)
 
-	//membuat koneksi ke redis
-	redisClient := buildRedis(cfg)
+	// //membuat koneksi ke redis
+	// redisClient := buildRedis(cfg)
 
-	//koneksi midtrans
-	topUpHandler := builder.buildTopUp(db, cfg)
+	// //koneksi midtrans
+	// topUpHandler := builder.buildTopUp(db, cfg)
 
 	//membuat routes
-	publicRoutes := builder.BuildPublicRoutes(cfg, db, redisClient)
-	privateRoutes := builder.BuildPrivateRoutes(cfg, db, redisClient)
+	publicRoutes := builder.BuildPublicRoutes(cfg, db)
+	privateRoutes := builder.BuildPrivateRoutes(cfg, db)
 
 	//membuat binder
 	echoBinder := &echo.DefaultBinder{}

@@ -43,3 +43,11 @@ func Register(username, password, roles string) *User {
 		Roles:    roles,
 	}
 }
+
+// Public Login
+func Login(username, password string) *User {
+	return &User{
+		Username: username,
+		Password: password,
+	}
+}

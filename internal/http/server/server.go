@@ -3,7 +3,10 @@ package server
 import (
 	"net/http"
 
-
+	"github.com/Sandhya-Pratama/bioskop-api/common"
+	"github.com/Sandhya-Pratama/bioskop-api/internal/config"
+	"github.com/Sandhya-Pratama/bioskop-api/internal/http/binder"
+	"github.com/Sandhya-Pratama/bioskop-api/internal/http/router"
 	"github.com/golang-jwt/jwt/v5"
 	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
@@ -59,12 +62,12 @@ func NewServer(
 }
 
 // func untuk pendeklarasian JWT Middleware
-func JWTProtected(secretKey string) echo.MiddlewareFunc {
+func JWTProtected(SecretKey string) echo.MiddlewareFunc {
 	return echojwt.WithConfig(echojwt.Config{
 		NewClaimsFunc: func(c echo.Context) jwt.Claims {
 			return &common.JwtCustomClaims{}
 		},
-		SigningKey: []byte(secretKey),
+		SigningKey: []byte(SecretKey),
 	})
 }
 
