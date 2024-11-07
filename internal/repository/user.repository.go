@@ -2,12 +2,9 @@ package repository
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
-	"time"
 
 	"github.com/Sandhya-Pratama/bioskop-api/entity"
-	"github.com/go-redis/redis/v8"
 	"gorm.io/gorm"
 )
 
@@ -16,8 +13,7 @@ const (
 )
 
 type UserRepository struct {
-	db          *gorm.DB
-	redisClient *redis.Client
+	db *gorm.DB
 }
 
 // membuat constructor untuk dependency
@@ -29,29 +25,11 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 // menampilkan get all user
 // menggunakan []*entity.User = karena akan membutuhkan data yg banyak dengan array slice of user.
 func (r *UserRepository) GetAll(ctx context.Context) ([]*entity.User, error) {
-	//melakukan returtn dari data user itu sendir, sehingga disimpan di variabel users
+	// Inisialisasi slice untuk menyimpan data pengguna
 	users := make([]*entity.User, 0)
 
-	val, err := r.redisClient.Get(context.Background(), Userkey).Result()
-	if err != nil {
-		err := r.db.WithContext(ctx).Find(&users).Error //menggunakan db untuk melakukan query ke database
-		if err != nil {
-			return nil, err
-		}
-		val, err := json.Marshal(users)
-		if err != nil {
-			return nil, err
-		}
-
-		// Set the data in Redis with an expiration time (e.g., 1 hour)
-		err = r.redisClient.Set(ctx, Userkey, val, time.Duration(1)*time.Minute).Err()
-		if err != nil {
-			return nil, err
-		}
-		return users, nil
-	}
-
-	err = json.Unmarshal([]byte(val), &users)
+	// Melakukan query ke database untuk mendapatkan semua pengguna
+	err := r.db.WithContext(ctx).Find(&users).Error
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +51,7 @@ func (r *UserRepository) CreateUser(ctx context.Context, user *entity.User) erro
 func (r *UserRepository) UpdateUser(ctx context.Context, user *entity.User) error {
 	if err := r.db.WithContext(ctx).
 		Model(&entity.User{}).
-		Where("id = ?", user.ID).
+		Where("id = ?", user.User_ID).
 		Updates(&user).Error; err != nil {
 		return err
 	}

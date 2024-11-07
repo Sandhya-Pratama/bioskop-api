@@ -5,7 +5,7 @@ import (
 )
 
 type User struct {
-	ID        int64      `json:"id"`
+	User_ID   int64      `gorm:"primaryKey;autoIncrement" json:"id"`
 	Username  string     `json:"name"`
 	Password  string     `json:"-"`
 	Roles     string     `json:"roles"`
@@ -25,9 +25,9 @@ func NewUser(username, password, roles string) *User {
 }
 
 // Admin Update User
-func UpdateUser(id int64, username, roles, password string) *User {
+func UpdateUser(user_id int64, username, roles, password string) *User {
 	return &User{
-		ID:        id,
+		User_ID:   user_id,
 		Username:  username,
 		Password:  password,
 		Roles:     roles,
@@ -50,4 +50,8 @@ func Login(username, password string) *User {
 		Username: username,
 		Password: password,
 	}
+}
+
+func (User) TableName() string {
+	return "User" // Pastikan sesuai dengan nama tabel di PostgreSQL
 }

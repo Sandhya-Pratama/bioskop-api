@@ -35,7 +35,7 @@ func (h *UserHandler) CreateUser(ctx echo.Context) error {
 	var input struct {
 		Username string `json:"username" validate:"required"`
 		Password string `json:"password" validate:"required"`
-		Roles    string `json:"roles" validate:"oneof=Admin User"`
+		Roles    string `json:"roles" validate:"oneof=admin user"`
 	}
 	//ini func untuk error checking
 	if err := ctx.Bind(&input); err != nil {
@@ -56,7 +56,7 @@ func (h *UserHandler) UpdateUser(ctx echo.Context) error {
 		ID       int64  `param:"id" validate:"required"`
 		Username string `json:"username" validate:"required"`
 		Password string `json:"password" validate:"required"`
-		Roles    string `json:"roles" validate:"oneof=Admin User"`
+		Roles    string `json:"roles" validate:"oneof=admin user"`
 	}
 
 	if err := ctx.Bind(&input); err != nil {
@@ -91,7 +91,7 @@ func (h *UserHandler) GetUserByID(ctx echo.Context) error {
 	}
 	return ctx.JSON(http.StatusOK, map[string]interface{}{
 		"data": map[string]interface{}{
-			"id":       user.ID,
+			"user_id":  user.User_ID,
 			"username": user.Username,
 			"password": user.Password,
 			"created":  user.CreatedAt,

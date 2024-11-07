@@ -1,0 +1,13 @@
+-- +goose Up
+CREATE TABLE "User" (
+  "user_id" BIGSERIAL PRIMARY KEY,
+  "username" VARCHAR(50) UNIQUE NOT NULL,
+  "password" VARCHAR(100) NOT NULL,
+  "roles" VARCHAR(20) NOT NULL,
+  "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "deleted_at" TIMESTAMP
+);
+
+-- +goose Down
+DROP TABLE IF EXISTS "User";

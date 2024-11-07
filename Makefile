@@ -8,12 +8,12 @@ dropdb:
 	docker exec -it postgres17 dropdb bioskop-api
 
 createmigrations:
-	migrate create -ext sql -dir db/migration -seq dbname
+	goose -dir db/migrations create create_user_table sql
 
-sqlc:
-	sqlc generate
+migrateup:
+	goose -dir db/migrations postgres "user=root dbname=bioskop-api sslmode=disable password=mysecretpassword port=5433" up
 
-test: 
-	go test -v -cover ./...
+migratedown:
+	goose -dir db/migrations postgres "user=root dbname=bioskop-api sslmode=disable password=mysecretpassword port=5433" down
 
-.PHONY: postgres createdb dropdb createmigrations sqlc test
+.PHONY: postgres createdb dropdb createmigrations migrateup migratedown

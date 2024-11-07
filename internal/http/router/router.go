@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	Admin = "Admin"
-	User  = "User"
+	Admin = "admin"
+	User  = "user"
 )
 
 var (

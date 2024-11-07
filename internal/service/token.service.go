@@ -26,7 +26,7 @@ func NewTokenService(cfg *config.Config) *TokenService {
 func (s *TokenService) GenerateAccessToken(ctx context.Context, user *entity.User) (string, error) {
 	expiredTime := time.Now().Local().Add(10 * time.Minute).Unix()
 	claim := common.JwtCustomClaims{
-		ID:       user.ID,
+		ID:       user.User_ID,
 		Username: user.Username,
 		Roles:    user.Roles,
 		RegisteredClaims: jwt.RegisteredClaims{

@@ -22,14 +22,3 @@ func NewBioskop(username, password, roles string) *User {
 		CreatedAt: time.Now(),
 	}
 }
-
-// Admin Update User
-func UpdateBioskop(id int64, username, roles, password string) *User {
-	return &User{
-		ID:        id,
-		Username:  username,
-		Password:  password,
-		Roles:     roles,
-		UpdatedAt: time.Now(),
-	}
-}

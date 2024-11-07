@@ -32,7 +32,7 @@ func NewAuthHandler(
 func (h *AuthHandler) Login(ctx echo.Context) error {
 	//pengecekan request
 	var input struct {
-		Email    string `json:"email" validate:"required,email"`
+		Username string `json:"username" validate:"required"`
 		Password string `json:"password" validate:"required"`
 	}
 	// di cek pake validate buat masukin input
@@ -40,7 +40,7 @@ func (h *AuthHandler) Login(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, validator.ValidatorErrors(err))
 	}
 	//untuk manggil login service di folder service
-	user, err := h.loginService.Login(ctx.Request().Context(), input.Email, input.Password)
+	user, err := h.loginService.Login(ctx.Request().Context(), input.Username, input.Password)
 	if err != nil {
 		return ctx.JSON(http.StatusUnprocessableEntity, err)
 	}
@@ -63,7 +63,6 @@ func (h *AuthHandler) Registration(ctx echo.Context) error {
 		Username string `json:"username" validate:"required"`
 		Password string `json:"password" validate:"required,min=8"`
 		Roles    string `json:"roles" validate:"required"`
-		Number   string `json:"number" validate:"required,min=11,max=13"`
 	}
 
 	if err := ctx.Bind(&input); err != nil { // di cek pake validate buat masukin input
