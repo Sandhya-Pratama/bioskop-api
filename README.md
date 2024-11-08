@@ -106,6 +106,3 @@ Gunakan endpoint berikut untuk autentikasi pengguna:
 2. Pilih file JSON koleksi Postman yang sudah diekspor dari proyek ini.
 3. Setelah impor selesai, Anda akan melihat semua endpoint API di dalam Postman, siap untuk diuji.
 
-## Lisensi
-
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
