@@ -39,7 +39,7 @@ func PublicRoutes(authHandler *handler.AuthHandler) []*Route {
 
 }
 
-func PrivateRoutes(userHandler *handler.UserHandler) []*Route {
+func PrivateRoutes(userHandler *handler.UserHandler, jadwalHandler *handler.JadwalHandler) []*Route {
 	return []*Route{
 		{
 			Method:  echo.POST,
@@ -73,6 +73,13 @@ func PrivateRoutes(userHandler *handler.UserHandler) []*Route {
 			Method:  echo.DELETE,
 			Path:    "/users/:id",
 			Handler: userHandler.DeleteUser,
+			Roles:   onlyAdmin,
+		},
+
+		{
+			Method:  echo.POST,
+			Path:    "/jadwals",
+			Handler: jadwalHandler.CreateJadwal,
 			Roles:   onlyAdmin,
 		},
 	}

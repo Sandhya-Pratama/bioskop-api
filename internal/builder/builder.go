@@ -28,6 +28,9 @@ func BuildPrivateRoutes(cfg *config.Config, db *gorm.DB) []*router.Route {
 	userService := service.NewUserService(userRepository)
 	userHandler := handler.NewUserHandler(userService)
 
+	jadwalRepository := repository.NewJadwalTayangRepository(db)
+	jadwalService := service.NewJadwalTayangService(jadwalRepository)
+	jadwalHandler := handler.NewJadwalHandler(jadwalService)
 	// Menggunakan PrivateRoutes dengan kedua handler
-	return router.PrivateRoutes(userHandler)
+	return router.PrivateRoutes(userHandler, jadwalHandler)
 }
