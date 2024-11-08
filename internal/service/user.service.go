@@ -38,14 +38,12 @@ func NewUserService(repository UserRepository) *UserService {
 	return &UserService{repository}
 }
 
-// func dibawah ini untuk type user usecase
-// ini untuk menampilkan data user
-// untuk memanggil repositoryx``
+
+// ini untuk menampilkan data user untuk memanggil repository
 func (s *UserService) GetAll(ctx context.Context) ([]*entity.User, error) {
 	return s.repository.GetAll(ctx)
 }
 
-// func dibawah ini untuk type user usecase
 // ini untuk membuat data user
 func (s *UserService) CreateUser(ctx context.Context, user *entity.User) error {
 	return s.repository.CreateUser(ctx, user)

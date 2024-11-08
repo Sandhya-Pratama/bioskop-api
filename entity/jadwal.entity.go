@@ -17,6 +17,15 @@ func NewJadwal(FilmID int, BioskopID int, TanggalTayang, WaktuTayang string) *Ja
 	}
 }
 
+func UpdateJadwal(FilmID int, BioskopID int, TanggalTayang, WaktuTayang string) *Jadwal_Tayang {
+	return &Jadwal_Tayang{
+		FilmID:        FilmID,
+		BioskopID:     BioskopID,
+		TanggalTayang: TanggalTayang,
+		WaktuTayang:   WaktuTayang,
+	}
+}
+
 func (Jadwal_Tayang) TableName() string {
 	return "Jadwal_Tayang"
 }

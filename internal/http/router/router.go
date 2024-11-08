@@ -82,5 +82,26 @@ func PrivateRoutes(userHandler *handler.UserHandler, jadwalHandler *handler.Jadw
 			Handler: jadwalHandler.CreateJadwal,
 			Roles:   onlyAdmin,
 		},
+
+		{
+			Method:  echo.GET,
+			Path:    "/jadwals:id",
+			Handler: jadwalHandler.GetJadwalByID,
+			Roles:   allRoles,
+		},
+
+		{
+			Method:  echo.PUT,
+			Path:    "/jadwals/:id",
+			Handler: jadwalHandler.UpdateJadwal,
+			Roles:   onlyAdmin,
+		},
+
+		{
+			Method:  echo.DELETE,
+			Path:    "/jadwals/:id",
+			Handler: jadwalHandler.DeleteJadwal,
+			Roles:   onlyAdmin,
+		},
 	}
 }
