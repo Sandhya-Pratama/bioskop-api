@@ -9,7 +9,6 @@ Bioskop API adalah proyek backend berbasis Golang yang menyediakan layanan untuk
 - [Teknologi yang Digunakan](#teknologi-yang-digunakan)
 - [Persyaratan](#persyaratan)
 - [Instalasi](#instalasi)
-- [Struktur Proyek](#struktur-proyek)
 - [Penggunaan API](#penggunaan-api)
 - [Mengimpor Koleksi Postman](#mengimpor-koleksi-postman)
 - [Lisensi](#lisensi)
