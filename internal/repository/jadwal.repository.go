@@ -15,7 +15,7 @@ func NewJadwalTayangRepository(db *gorm.DB) *JadwalTayangRepository {
 	return &JadwalTayangRepository{db: db}
 }
 
-func (r *JadwalTayangRepository) CreateJadwal(ctx context.Context, jadwal *entity.JadwalTayang) error {
+func (r *JadwalTayangRepository) CreateJadwal(ctx context.Context, jadwal *entity.Jadwal_Tayang) error {
 	err := r.db.WithContext(ctx).Create(&jadwal).Error
 	if err != nil {
 		return err

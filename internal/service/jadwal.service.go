@@ -7,11 +7,11 @@ import (
 )
 
 type JadwalTayangUsecase interface {
-	CreateJadwal(ctx context.Context, jadwal *entity.JadwalTayang) error
+	CreateJadwal(ctx context.Context, jadwal *entity.Jadwal_Tayang) error
 }
 
 type JadwalTayangRepository interface {
-	CreateJadwal(ctx context.Context, jadwal *entity.JadwalTayang) error
+	CreateJadwal(ctx context.Context, jadwal *entity.Jadwal_Tayang) error
 }
 
 type JadwalTayangService struct {
@@ -22,6 +22,6 @@ func NewJadwalTayangService(repository JadwalTayangRepository) *JadwalTayangServ
 	return &JadwalTayangService{repository}
 }
 
-func (s *JadwalTayangService) CreateJadwal(ctx context.Context, jadwal *entity.JadwalTayang) error {
+func (s *JadwalTayangService) CreateJadwal(ctx context.Context, jadwal *entity.Jadwal_Tayang) error {
 	return s.repository.CreateJadwal(ctx, jadwal)
 }

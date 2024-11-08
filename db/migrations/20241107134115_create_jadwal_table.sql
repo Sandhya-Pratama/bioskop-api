@@ -9,3 +9,4 @@ CREATE TABLE "Jadwal_Tayang" (
 
 -- +goose Down
 DROP TABLE IF EXISTS "Jadwal_Tayang";
+
